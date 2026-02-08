@@ -1,10 +1,11 @@
 class Game:
+    total_games = 0 # Variável de classe para contar o número total de jogos
     def __init__(self, name="", yearLaunch=0, multiplayer=0, note=0):
         self.name = name
         self.yearLaunch = yearLaunch
         self.multiplayer = multiplayer
         self.note = note
-        self.totalEvaluation = 0
+        Game.total_games += 1
         self.evaluators = 0
 
     def __str__(self):
@@ -18,14 +19,16 @@ class Game:
         print(f"Avaliação do Jogo: {self.note}\n")
 
     def evaluate(self, note):
-        self.totalEvaluation += note
+        self.note += note
         self.evaluators += 1
 
     def average(self):
-        print(f"Média do filme{self.name}: {self.totalEvaluation / self.evaluators}")
+        print(f"Média do filme{self.name}: {self.note / self.evaluators}")
 
 game1 = Game("The Legend of Zelda", 2017, False, 9.5)
 game2 = Game("Fortnite", 2017, True, 8.0)
+game3 = Game("Red Dead Redemption 2", 2018, False, 9.8)
+
 
 game1.technical_sheet()
 game2.technical_sheet()
@@ -37,3 +40,6 @@ game1.average()
 game2.evaluate(6.5)
 game2.evaluate(7.5)
 game2.average()
+
+# Exibindo o número total de jogos criados
+print(f"Total de jogos criados: {Game.total_games}")
