@@ -1,8 +1,10 @@
+from modelos.avaliacao import Avaliacao
 class Biblioteca:
     bibliotecas = []
     def __init__(self, nome):
         self.nome = nome
         self._ativo = False
+        self._avaliacao = []
         Biblioteca.bibliotecas.append(self)
 
     def __str__(self):
@@ -20,3 +22,7 @@ class Biblioteca:
     @property
     def ativo(self):
         return "ativada" if self._ativo else "desativada"
+    
+    def receber_avaliacao(self, cliente, nota):
+        avaliacao = Avaliacao(cliente, nota)
+        self._avaliacao.append(avaliacao)
