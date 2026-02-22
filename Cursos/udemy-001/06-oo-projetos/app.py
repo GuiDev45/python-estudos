@@ -7,8 +7,10 @@ biblioteca_shopping = Biblioteca("Biblioteca do Shopping")
 
 livro1 = Livro("1984", "George Orwell", 30.0, "084-3254")
 livro2 = Livro("Brave New World", "Aldous Huxley", 25.0, "022-1978")
-
 revista1 = Revista("National Geographic", "John Doe", 15.0, "Quinta")
+
+livro1.aplicar_desconto()
+revista1.aplicar_desconto()
 
 biblioteca_cidade.adicionar_item(livro1)
 biblioteca_cidade.adicionar_item(revista1)
