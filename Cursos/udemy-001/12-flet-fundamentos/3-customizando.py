@@ -1,0 +1,35 @@
+import flet as ft
+
+def main(page: ft.Page):
+    page.title = "Flet Exemplo"
+    
+    # cores
+    page.bgcolor = ft.Colors.GREEN_ACCENT_700
+    
+    page.horizontal_alignment = ft.CrossAxisAlignment.START
+    page.vertical_alignment = ft.MainAxisAlignment.START
+    
+    page.padding = ft.padding.all(100)
+    
+    page.add(
+        ft.Text(value="Hello World"),
+        ft.Container(
+            ft.Text(value="Hello World 2"),
+            bgcolor="black"
+        )  
+    )
+    
+    # Desktop
+    page.window_height = 300
+    page.window_width = 600
+    page.window.resizable = False
+    
+    # posição
+    page.window_top = 300
+    page.window_left = 300
+    
+    page.window_progress_bar = 1
+    
+    page.update()
+
+ft.app(target=main)
