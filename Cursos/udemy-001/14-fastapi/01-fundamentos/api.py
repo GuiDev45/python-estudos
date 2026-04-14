@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
@@ -13,6 +14,12 @@ class Jogador(BaseModel):
     nome: str
     idade: int
     time: str
+
+
+class AtualizaJogador(BaseModel):
+    nome: Optional[str] = None
+    idade: Optional[int] = None
+    time: Optional[str] = None
 
 
 # get-jogador/1 - Path Parameter
@@ -46,3 +53,25 @@ def cadastra_jogador(jogador_id: int, jogador: Jogador):
         return {"Erro": "Jogador já existe"}
     jogadores[jogador_id] = jogador
     return jogadores[jogador_id]
+
+
+@app.put("/atualiza-jogador/{jogador_id}")
+def atualiza_jogador(jogador_id: int, jogador: AtualizaJogador):
+    if jogador_id not in jogadores:
+        return {"Erro": "Jogador não existe"}
+    if jogador.nome is not None:
+        jogadores[jogador_id]["nome"] = jogador.nome
+    if jogador.idade is not None:
+        jogadores[jogador_id]["idade"] = jogador.idade
+    if jogador.time is not None:
+        jogadores[jogador_id]["time"] = jogador.time
+
+    return jogadores[jogador_id]
+
+
+@app.delete("/exclusao-jogador/{jogador_id}")
+def exclui_jogador(jogador_id: int):
+    if jogador_id not in jogadores:
+        return {"Erro": "Jogador não existe"}
+    del jogadores[jogador_id]
+    return {"Mensagem": "Jogador excluído com sucesso"}
